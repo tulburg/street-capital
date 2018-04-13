@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-class Login extends Component {
+class ResetPassword extends Component {
   render() {
     return (
       <LoginContainer>
@@ -12,7 +12,11 @@ class Login extends Component {
           </div>
 
           <LoginForm>
-            <h6 className="form__header">Login to continue</h6>
+            <h6 className="form__header">password reset</h6>
+            <div className="form__subheader">
+                <p>Your password has been reset succesfully</p>
+                <p>Enter a new password to continue</p>
+            </div>
             <div className="form__input-wrap">
               <input className="form__input" type="text" placeholder="Name" />
               <input
@@ -21,12 +25,7 @@ class Login extends Component {
                 placeholder="Password"
               />
             </div>
-            <div style={{ marginTop: "15px", marginBottom: "35px" }}>
-              <a href="#" className="form__fpw">
-                forgot password?
-              </a>
-            </div>
-            <button className="form__btn">Login</button>
+            <button className="form__btn">Save &amp; Continue</button>
           </LoginForm>
         </LoginContent>
       </LoginContainer>
@@ -54,11 +53,20 @@ const LoginForm = styled.div`
     margin-bottom: 25px;
   }
 
+  .form__subheader {
+    opacity: 0.59;
+    font-size: 14px;
+    color: #4a4a4a;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
   .form__input-wrap {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 140px;
+    margin-bottom: 40px;
   }
 
   .form__input {
@@ -80,7 +88,7 @@ const LoginForm = styled.div`
 
   .form__btn {
     background-color: #1c2d41;
-    width: 143px;
+    width: 208px;
     height: 55px;
     border-radius: 9px;
     color: #fff;
@@ -118,4 +126,4 @@ const LoginContent = styled.div`
   }
 `;
 
-export default Login;
+export default ResetPassword;
