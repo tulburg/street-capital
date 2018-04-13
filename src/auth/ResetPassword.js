@@ -18,11 +18,11 @@ class ResetPassword extends Component {
                 <p>Enter a new password to continue</p>
             </div>
             <div className="form__input-wrap">
-              <input className="form__input" type="text" placeholder="Name" />
+              <input className="form__input" type="text" placeholder="New Password" />
               <input
                 className="form__input"
                 type="password"
-                placeholder="Password"
+                placeholder="Confirm Password"
               />
             </div>
             <button className="form__btn">Save &amp; Continue</button>
