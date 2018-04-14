@@ -6,6 +6,7 @@ import ResetPassword from "./auth/ResetPassword";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import "./App.css";
+import Dashboard from "./dashboard";
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
           <Route exact path="/" component={Login} />
           <Route path="/reset-password" component={ResetPassword} />
           <Route path="/forgot-password" component={ForgotPassword} />
+          <Route path='/dashboard' component={Dashboard} />
         </div>
       </Router>
     );
