@@ -6,7 +6,9 @@ import styled from 'styled-components';
  */
 const CourseIcon = ({ course_title }) => (
   <CourseIconStyle>
-    <div className="icon" />
+    <div className="icon">
+      <i className="fas fa-users" />
+    </div>
     <p className="title">{course_title}</p>
   </CourseIconStyle>
 );
@@ -16,6 +18,11 @@ const CourseIconStyle = styled.div`
   flex-direction: column;
   align-items: center;
   .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 40px;
     height: 153px;
     width: 153px;
     border-radius: 100px;
