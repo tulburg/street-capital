@@ -1,96 +1,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import Modal from '../components/Modal';
 import Header from '../components/Header';
+import { Content, SendInvite } from '../components/Layout';
+import Card from '../components/Card';
+import Button from '../components/Button';
+import Tests from './Tests';
+import OngoingTests from './OngoingTests';
 
-const SendInvite = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  h1 {
-    font-size: 48px;
-    font-weight: bold;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #9b9b9b;
-    margin-bottom: 20px;
-  }
-
-  h4 {
-    font-size: 18px;
-    font-weight: bold;
-    letter-spacing: 1.3px;
-    color: #000000;
-    margin-bottom: 20px;
-
-    &.uppercase {
-      text-transform: uppercase;
-    }
-  }
-
-  .subtext {
-    opacity: 0.59;
-    font-size: 14px;
-    color: #4a4a4a;
-  }
-
-  .textbox {
-    width: 456px;
-    height: 63px;
-    border-radius: 5px;
-    background-color: #f5f6fa;
-    border: solid 1px #979797;
-    font-size: 18px;
-    color: #9b9b9b;
-    padding-left: 15px;
-    margin-top: 25px;
-    margin-bottom: 35px;
-  }
-
-  button {
-    width: 143px;
-    height: 55px;
-    border-radius: 9px;
-    background-color: #50e3c2;
-    border: 0;
-    font-size: 18px;
-    font-weight: bold;
-    color: #1c2d41;
-  }
-
-  .input-wrap {
-    position: relative;
-
-    &__btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 100%;
-      border: 0;
-      position: absolute;
-      right: 12px;
-      top: 38px;
-      background-color: #50e3c2;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-  }
-
-  .invite-sent {
-    font-size: 14px;
-    color: #000000;
-  }
-`;
 export default class Dashboard extends Component {
   state = {
     showModal: true,
@@ -172,7 +90,8 @@ export default class Dashboard extends Component {
           </div>
 
           <Route
-            path={`${this.props.match.url}`}
+            exact
+            path="/dashboard"
             render={() => (
               <div className="main-section">
                 <Modal
@@ -219,47 +138,24 @@ export default class Dashboard extends Component {
                 </Modal>
                 <h2 className="main-section__header">Overview</h2>
                 <div className="card-wrap">
-                  <Card>
-                    <div className="top">
-                      <div className="icon">
-                        <i className="far fa-address-card" />
-                      </div>
-                      <div className="card__info">
-                        <h2>3600</h2>
-                        <p>Signed Up Users</p>
-                      </div>
-                    </div>
-                    <button onClick={() => this.setState({ showModal: true })}>
-                      Invite Users
-                    </button>
+                  <Card
+                    bg="invert"
+                    icon="address-card"
+                    number={3600}
+                    title="signed up users"
+                  >
+                    <Button
+                      onClick={() => this.setState({ showModal: true })}
+                      color="#000"
+                      text="Invite Users"
+                      bg="#50e3c2"
+                    />
                   </Card>
-                  <Card className="card--white">
-                    <div className="top">
-                      <div className="icon">
-                        <i className="fas fa-users" />
-                      </div>
-                      <div className="card__info">
-                        <h2>400</h2>
-                        <p>Active Users</p>
-                      </div>
-                    </div>
-                    <button onClick={() => this.setState({ showModal: true })}>
-                      Invite Users
-                    </button>
+                  <Card icon="users" number={400} title="Active users">
+                    <Button text="View Ongoing Tests" bg="#1c2d41" />
                   </Card>
-                  <Card className="card--white">
-                    <div className="top">
-                      <div className="icon">
-                        <i className="far fa-file-alt" />
-                      </div>
-                      <div className="card__info">
-                        <h2>1000</h2>
-                        <p>Paid Users</p>
-                      </div>
-                    </div>
-                    <button onClick={() => this.setState({ showModal: true })}>
-                      Invite Users
-                    </button>
+                  <Card icon="file-alt" number={1000} title="Paid users">
+                    <Button text="View purchases" bg="#1c2d41" />
                   </Card>
                 </div>
 
@@ -311,6 +207,11 @@ export default class Dashboard extends Component {
               </div>
             )}
           />
+          <Route path={`${this.props.match.url}/tests`} component={Tests} />
+          <Route
+            path={`${this.props.match.url}/flashcards`}
+            component={OngoingTests}
+          />
         </Content>
       </div>
     );
@@ -341,64 +242,6 @@ const FlashCard = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-`;
-
-const Card = styled.div`
-  width: 30%;
-  padding: 32px 30px;
-  border-radius: 12px;
-  box-shadow: 0 18px 29px 0 rgba(132, 140, 163, 0.44);
-  background-color: #1c2d41;
-  border: solid 1px rgba(155, 155, 155, 0.24);
-  display: flex;
-  flex-direction: column;
-  color: #fff;
-
-  &.card--white {
-    background-color: #fff;
-    color: #1c2d41;
-
-    p {
-      color: #99a0a9;
-    }
-
-    button {
-      background-color: #1c2d41;
-      color: #fff;
-    }
-  }
-
-  .top {
-    display: flex;
-    margin-bottom: 25px;
-  }
-
-  .card__info {
-    h2 {
-      margin-bottom: 10px;
-      font-size: 28px;
-    }
-
-    p {
-      font-size: 18px;
-    }
-  }
-
-  .icon {
-    margin-right: 25px;
-    font-size: 3em;
-  }
-
-  button {
-    height: 50px;
-    border-radius: 8px;
-    background-color: #50e3c2;
-    border: 0;
-
-    &:hover {
-      cursor: pointer;
-    }
   }
 `;
 
@@ -438,117 +281,6 @@ const NavigationCard = styled.div`
 
     .navigation__link-text {
       width: 55%;
-    }
-  }
-`;
-
-const Content = styled.div`
-  background-color: #f6f6f6;
-  display: flex;
-  justify-content: space-between;
-  padding: 78px 94px;
-
-  .navigation {
-    width: 15%;
-  }
-
-  .main-section {
-    // border: 1px solid red;
-    width: 80%;
-
-    .main-section__header {
-      margin-bottom: 25px;
-    }
-
-    .card-wrap {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .main-section__separator {
-      opacity: 0.33;
-      border: solid 1px #979797;
-      margin-top: 62px;
-      margin-bottom: 42px;
-    }
-
-    .quick-links {
-      width: 30%;
-      display: flex;
-      flex-direction: column;
-      padding: 10px 0;
-      justify-content: space-around;
-
-      &__header {
-        color: red;
-        text-transform: uppercase;
-        font-size: 14px;
-        font-weight: bold;
-        letter-spacing: 2.3px;
-        color: #9b9b9b;
-      }
-
-      &__link {
-        font-size: 18px;
-        font-weight: bold;
-        line-height: 1.22;
-        color: #1c2d41;
-
-        span:first-child {
-          margin-right: 10px;
-        }
-      }
-    }
-
-    .invite-users {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      &__header {
-        margin-bottom: 34px;
-        font-size: 24px;
-      }
-
-      &__input-wrap {
-        position: relative;
-
-        input {
-          width: 487px;
-          height: 68px;
-          border-radius: 9px;
-          box-shadow: 0 8px 17px 0 rgba(153, 160, 169, 0.23);
-          background-color: #ffffff;
-          border: solid 1px rgba(179, 179, 179, 0.3);
-        }
-
-        button {
-          width: 115px;
-          height: 53px;
-          border: 0;
-          border-radius: 9px;
-          background-color: #50e3c2;
-          position: absolute;
-          right: 8px;
-          top: 8px;
-          font-size: 18px;
-          font-weight: bold;
-          letter-spacing: 3px;
-          text-transform: uppercase;
-          color: #1c2d41;
-        }
-      }
-
-      &__link {
-        margin-top: 25px;
-
-        a {
-          font-size: 12px;
-          font-weight: bold;
-          letter-spacing: 2px;
-          color: #1c2d41;
-        }
-      }
     }
   }
 `;

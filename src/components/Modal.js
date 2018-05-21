@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import Transition from "react-transition-group/Transition";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import Transition from 'react-transition-group/Transition';
 
 const Modal = styled.div`
   background: #ffffff;
@@ -20,7 +20,7 @@ const Modal = styled.div`
   z-index: 1050;
   transition: opacity 300ms ease-in-out;
   opacity: ${props =>
-    props.state === "entering" ? "0" : props.state === "entered" ? "1" : "0"};
+    props.state === 'entering' ? '0' : props.state === 'entered' ? '1' : '0'};
 `;
 
 const Content = styled.main`
@@ -59,7 +59,7 @@ export default class ModalComponent extends Component {
 
   handleClick = e => {
     console.dir(e.target);
-    if (e.target.dataset.name == "modal") {
+    if (e.target.dataset.name === 'modal') {
       this.props.closeModal();
     }
   };

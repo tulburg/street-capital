@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Route, Link } from 'react-router-dom';
-import Header from '../components/Header';
 import CourseIcon from '../components/CourseIcon';
-import { Content, Horizontal } from '../components/Layout';
+import { Horizontal } from '../components/Layout';
 import Card from '../components/Card';
 import Button from '../components/Button';
 
