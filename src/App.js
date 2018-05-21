@@ -9,24 +9,24 @@ import "./App.css";
 import Dashboard from "./dashboard";
 
 class App extends Component {
-  render() {
-    return (
-      <Router>
-        <div>
-          <Route exact path="/" component={Login} />
-          <Route path="/reset-password" component={ResetPassword} />
-          <Route path="/forgot-password" component={ForgotPassword} />
-          <Route path='/dashboard' component={Dashboard} />
-        </div>
-      </Router>
-    );
-  }
+  	render() {
+	    return (
+	      	<Router>
+				<div>
+					<Route exact path="/" component={Login} />
+					<Route path="/reset-password" component={ResetPassword} />
+					<Route path="/forgot-password" component={ForgotPassword} />
+					<Route path='/dashboard' component={Dashboard} />
+				</div>
+	      	</Router>
+	    );
+  	}
 }
 
 const Container = styled.div`
-  border: 1px solid blue;
-  display: flex;
-  height: 100vh;
+	border: 1px solid blue;
+	display: flex;
+	height: 100vh;
 `;
 
 export default App;
