@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Modal from "../components/Modal";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Modal from '../components/Modal';
+import Header from '../components/Header';
 
 const SendInvite = styled.div`
   display: flex;
@@ -105,12 +106,7 @@ export default class Dashboard extends Component {
   render() {
     return (
       <div>
-        <Header>
-          <div className="header__logo">Lawyr</div>
-          <div>
-            <button className="btn-signout">Sign out</button>
-          </div>
-        </Header>
+        <Header />
         <Content>
           <div className="navigation">
             <NavigationCard>
@@ -217,7 +213,7 @@ export default class Dashboard extends Component {
                       </div>
                     </div>
                     <span className="invite-sent">
-                      Invitation Email to user@devcenter.co sent{" "}
+                      Invitation Email to user@devcenter.co sent{' '}
                     </span>
                   </SendInvite>
                 </Modal>
@@ -554,33 +550,5 @@ const Content = styled.div`
         }
       }
     }
-  }
-`;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 90px;
-  padding-right: 90px;
-  height: 80px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
-
-  .header__logo {
-    font-size: 32px;
-    font-weight: bold;
-    color: #000;
-  }
-
-  .btn-signout {
-    font-size: 14px;
-    letter-spacing: 0.9px;
-    color: #000;
-    width: 131px;
-    height: 50px;
-    border-radius: 8px;
-    border: 0;
-    background-color: #f6f6f6;
   }
 `;
