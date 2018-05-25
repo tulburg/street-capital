@@ -1,40 +1,19 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { Component } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import store from '../store';
 
-const HeaderStyle = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 90px;
-  padding-right: 90px;
-  height: 80px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
-
-  .header__logo {
-    font-size: 32px;
-    font-weight: bold;
-    color: #000;
-  }
-
-  .btn-signout {
-    font-size: 14px;
-    letter-spacing: 0.9px;
-    color: #000;
-    width: 131px;
-    height: 50px;
-    border-radius: 8px;
-    border: 0;
-    background-color: #f6f6f6;
-  }
-`;
-const Header = () => (
-  <HeaderStyle>
-    <div className="header__logo">Lawyr</div>
-    <div>
-      <button className="btn-signout">Sign out</button>
-    </div>
-  </HeaderStyle>
-);
-
-export default Header;
+export default class Header extends Component {
+	logout = () => { this.setState({logout: true}); store.dispatch({ type: 'LOGOUT_ACTION', payload: {} }); }
+	state = { logout: false }
+  	render() {
+  		if(this.state.logout) { return (<Redirect to="/"/>); }
+	    return (
+		  	<header>
+		    	<Link to="/" className="no-decoration"><div className="header__logo">Lawyr</div></Link>
+		    	<div>
+		      		<button className="btn-signout" onClick={() => this.logout() }>Sign out</button>
+				</div>
+		  	</header>
+		)
+	}
+}

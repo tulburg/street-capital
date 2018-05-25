@@ -13,11 +13,11 @@ export const Content = styled.div`
   min-height: 100vh;
 
   .navigation {
-    width: 15%;
+    width: 20%;
   }
 
   .main-section {
-    width: 80%;
+    width: 75%;
 
     .main-section__header {
       margin-bottom: 25px;
@@ -35,8 +35,8 @@ export const Content = styled.div`
     }
 
     .main-section__separator {
-      opacity: 0.33;
-      border: solid 1px #979797;
+      opacity: 0.2;
+      border-bottom: solid 1px #979797;
       margin-top: 62px;
       margin-bottom: 42px;
     }
@@ -58,10 +58,11 @@ export const Content = styled.div`
       }
 
       &__link {
-        font-size: 18px;
+        font-size: 14px;
         font-weight: bold;
         line-height: 1.22;
         color: #1c2d41;
+        margin-top: 15px;
 
         span:first-child {
           margin-right: 10px;

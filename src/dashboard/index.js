@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Route, Link } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import Modal from '../components/Modal';
 import Header from '../components/Header';
 import { Content, SendInvite } from '../components/Layout';
 import Card from '../components/Card';
 import Button from '../components/Button';
+import Nav from '../components/Nav';
 import Tests from './Tests';
 import OngoingTests from './OngoingTests';
+import CreateTest from './CreateTest';
+import store from '../store';
 
 export default class Dashboard extends Component {
   state = {
@@ -22,71 +25,21 @@ export default class Dashboard extends Component {
     });
   };
   render() {
+  	const nav = [
+  		{ url: "", title: "Home", icon: "fa-home" },
+  		{ url: "tests", title: "Tests", icon: "fa-file-alt" },
+  		{ url: "flashcards", title: "Flashcards", icon: "fa-sticky-note" },
+  		{ separator: true },
+  		{ url: "payments", title: "Payments", icon: "fa-credit-card" },
+  		{ url: "users", title: "All Users", icon: "fa-user" }
+  	]
+  	if(!store.getState().state.session.active) { return (<Redirect to="/"/>); }
     return (
       <div>
         <Header />
         <Content>
           <div className="navigation">
-            <NavigationCard>
-              <li className="navigation__item">
-                <Link
-                  to={`${this.props.match.url}`}
-                  className="navigation__link"
-                >
-                  <span className="navigation__link-icon">
-                    <i className="fas fa-home" />
-                  </span>
-                  <span className="navigation__link-text">Home</span>
-                </Link>
-              </li>
-              <li className="navigation__item">
-                <Link
-                  to={`${this.props.match.url}/tests`}
-                  className="navigation__link"
-                >
-                  <span className="navigation__link-icon">
-                    <i className="far fa-file-alt" />
-                  </span>
-                  <span className="navigation__link-text">Tests</span>
-                </Link>
-              </li>
-              <li className="navigation__item">
-                <Link
-                  to={`${this.props.match.url}/flashcards`}
-                  className="navigation__link"
-                >
-                  <span className="navigation__link-icon">
-                    <i className="fas fa-sticky-note" />
-                  </span>
-                  <span className="navigation__link-text">Flashcards</span>
-                </Link>
-              </li>
-              <li>
-                <hr />
-              </li>
-              <li className="navigation__item">
-                <Link
-                  to={`${this.props.match.url}/payments`}
-                  className="navigation__link"
-                >
-                  <span className="navigation__link-icon">
-                    <i className="far fa-credit-card" />
-                  </span>
-                  <span className="navigation__link-text">Payments</span>
-                </Link>
-              </li>
-              <li className="navigation__item">
-                <Link
-                  to={`${this.props.match.url}/users`}
-                  className="navigation__link"
-                >
-                  <span className="navigation__link-icon">
-                    <i className="fas fa-user" />
-                  </span>
-                  <span className="navigation__link-text">All Users</span>
-                </Link>
-              </li>
-            </NavigationCard>
+            <Nav items={ nav } url={this.props.match.url}/>
           </div>
 
           <Route
@@ -96,8 +49,7 @@ export default class Dashboard extends Component {
               <div className="main-section">
                 <Modal
                   closeModal={this.onCloseModal}
-                  visible={this.state.showModal}
-                >
+                  visible={this.state.showModal}>
                   <SendInvite>
                     <h4 className="header">Invite users</h4>
                     <span className="subtext">
@@ -201,7 +153,7 @@ export default class Dashboard extends Component {
                     <button>invite</button>
                   </div>
                   <p className="invite-users__link">
-                    <a href="/">Go to users page</a>
+                    <a href="/">GO TO USERS PAGE</a>
                   </p>
                 </div>
               </div>
@@ -209,9 +161,10 @@ export default class Dashboard extends Component {
           />
           <Route path={`${this.props.match.url}/tests`} component={Tests} />
           <Route
-            path={`${this.props.match.url}/flashcards`}
+            path={`${this.props.match.url}/ongoing`}
             component={OngoingTests}
           />
+          <Route path={`${this.props.match.url}/create-test`} component={CreateTest} />
         </Content>
       </div>
     );
@@ -220,7 +173,6 @@ export default class Dashboard extends Component {
 
 const FlashCard = styled.div`
   width: 30%;
-  height: 158px;
   border-radius: 12px;
   background-color: #d6dce3;
   display: flex;
@@ -229,58 +181,18 @@ const FlashCard = styled.div`
   align-items: center;
 
   .flashcard__text {
-    font-size: 28px;
+    font-size: 22px;
     width: 50%;
   }
 
   .flashcard__icon {
-    height: 60px;
-    width: 60px;
+    height: 40px;
+    width: 40px;
     border-radius: 100%;
     background-color: #1c2d41;
     color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-`;
-
-const NavigationCard = styled.div`
-  border-radius: 8px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px 0 rgba(153, 160, 169, 0.29);
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  padding: 15px 10px;
-  font-size: 18px;
-
-  hr {
-    opacity: 0.17;
-    border: solid 1px #979797;
-  }
-
-  .navigation__link {
-    border: 1px solid transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    color: #4a4a4a;
-    text-decoration: none;
-    height: 50px;
-
-    &:hover {
-      background-color: #1c2d41;
-      color: #fff;
-    }
-
-    .navigation__link-icon {
-      margin-right: 20px;
-    }
-
-    .navigation__link-text {
-      width: 55%;
-    }
   }
 `;

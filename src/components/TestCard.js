@@ -30,7 +30,7 @@ const TestCard = ({ start_time, test, year, participants }) => (
         <div className="item">
           <span className="header">participants</span>
           <p>
-            {participants} <a href="#">View All</a>{' '}
+            {participants} <a href="/">View All</a>{' '}
           </p>
         </div>
       )}
