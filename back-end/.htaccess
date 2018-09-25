@@ -1,0 +1,9 @@
+<Files .htaccess>
+	Order allow,deny
+	Deny from all
+</Files>
+
+Options -MultiViews
+
+RewriteEngine on
+RewriteRule !\.(js|ico|git|jpg|png|css|svg|html|mp4|zip|m4v|avi|mkv|apk)$ router.php [QSA,L]
